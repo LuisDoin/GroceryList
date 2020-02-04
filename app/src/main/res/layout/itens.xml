@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:padding="15dp" android:id="@+id/itensParent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/quantidade"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item"
+                android:text="@string/quantidade"
+                />
+
+            <TextView
+                android:id="@+id/data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/data"
+                android:layout_below="@+id/quantidade"
+                android:paddingTop="5dp"
+                />
+
+            <TableRow
+
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <Button
+                    android:id="@+id/editar"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@android:drawable/ic_menu_edit"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+
+
+                    />
+
+                <Button
+                    android:id="@+id/deletar"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@android:drawable/ic_delete"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="5dp"
+                    />
+
+
+            </TableRow>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
