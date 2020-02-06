@@ -20,22 +20,20 @@
                 />
 
             <TextView
-                android:id="@+id/detailsQuantidade"
-                android:paddingTop="5dp"
+                android:id="@+id/detailsQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detailsItem"
-                android:text="@string/quantidade"
-                />
+                android:paddingTop="5dp"
+                android:text="@string/quantity" />
 
             <TextView
-                android:id="@+id/detailsData"
+                android:id="@+id/detailsDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/data"
-                android:layout_below="@+id/detailsQuantidade"
+                android:layout_below="@+id/detailsQuantity"
                 android:paddingTop="5dp"
-                />
+                android:text="@string/date" />
 
             <TableRow
 
@@ -45,7 +43,7 @@
                 android:layout_width="wrap_content">
 
                 <Button
-                    android:id="@+id/detailsEditarButton"
+                    android:id="@+id/detailsEditButton"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@android:drawable/ic_menu_edit"
@@ -56,7 +54,7 @@
                     />
 
                 <Button
-                    android:id="@+id/detailsDeletarButton"
+                    android:id="@+id/detailsDeleteButton"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@android:drawable/ic_delete"

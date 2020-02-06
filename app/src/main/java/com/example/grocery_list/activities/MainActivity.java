@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private EditText nome, quantidade;
-    private Button salvarAdd;
+    private EditText name, quantity;
+    private Button saveAdd;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private List<ListItem> listItem;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        listItem = db.getAllItens();
+        listItem = db.getAllItems();
         adapter = new MyAdapter(this, listItem);
         recyclerView.setAdapter(adapter);
 
@@ -74,15 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
         dialogBuilder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.addpopup, null);
-        nome = (EditText) view.findViewById(R.id.nomeInput);
-        quantidade = (EditText) view.findViewById(R.id.quantidadeInput);
-        salvarAdd = (Button) view.findViewById(R.id.addButton);
+        name = (EditText) view.findViewById(R.id.nameInput);
+        quantity = (EditText) view.findViewById(R.id.quantityInput);
+        saveAdd = (Button) view.findViewById(R.id.addButton);
 
         dialogBuilder.setView(view);
         dialog = dialogBuilder.create();
         dialog.show();
 
-        salvarAdd.setOnClickListener(new View.OnClickListener() {
+        saveAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -96,14 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void adicionarItem(){
 
-        if( !nome.getText().toString().isEmpty() || !quantidade.getText().toString().isEmpty()) {
+        if( !name.getText().toString().isEmpty() || !quantity.getText().toString().isEmpty()) {
 
-            ListItem item = new ListItem(nome.getText().toString(), quantidade.getText().toString());
+            ListItem item = new ListItem(name.getText().toString(), quantity.getText().toString());
 
             db.addItem(item);
 
             listItem.clear();
-            listItem.addAll(db.getAllItens());
+            listItem.addAll(db.getAllItems());
 
             adapter.notifyDataSetChanged();
         }
@@ -117,13 +117,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1)
             if( resultCode == RESULT_OK){
 
-                String caso = data.getStringExtra("acao");
+                String action = data.getStringExtra("action");
                 int position = data.getIntExtra("position", -1);
                 ListItem item = data.getParcelableExtra("item");
 
-                switch (caso){
+                switch (action){
 
-                    case "deletar":
+                    case "delete":
 
                         db.deleteItem(item.getId());
 
@@ -135,20 +135,20 @@ public class MainActivity extends AppCompatActivity {
                         }else {
 
                             listItem.clear();
-                            listItem = db.getAllItens();
+                            listItem = db.getAllItems();
                             adapter.notifyItemRemoved(position);
                             adapter = new MyAdapter(this, listItem);
                             recyclerView.setAdapter(adapter);
 
                         }
 
-                    case "editar":
+                    case "edit":
 
                         if ( position != -1 ){
 
                         db.updateItem(item);
                         listItem.clear();
-                        listItem.addAll(db.getAllItens());
+                        listItem.addAll(db.getAllItems());
                         adapter.notifyDataSetChanged();
                         adapter = new MyAdapter(this, listItem);
                         recyclerView.setAdapter(adapter);
@@ -160,21 +160,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-        // Chamado do MainActivity.onCreate na condição de não haver itens na db ao inicializar o app.
+        // Chamado do MainActivity.onCreate na condição de não haver items na db ao inicializar o app.
         // Também chamado do MyAdapter.deletePopup na condição de ter sido excluído o último item da db.
 
         if ( requestCode == 2 )
             if ( resultCode == RESULT_OK){
 
-                String nome = data.getStringExtra("nome");
-                String quantidade = data.getStringExtra("quantidade");
+                String name = data.getStringExtra("name");
+                String quantity = data.getStringExtra("quantity");
 
-                ListItem item = new ListItem(nome, quantidade);
+                ListItem item = new ListItem(name, quantity);
 
                 db.addItem(item);
 
                 listItem.clear();
-                listItem.addAll(db.getAllItens());
+                listItem.addAll(db.getAllItems());
                 adapter = new MyAdapter(this, listItem); //Por que não adapter.notifyItemInserted(0); ?
                 recyclerView.setAdapter(adapter);
 

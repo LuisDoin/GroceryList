@@ -13,35 +13,35 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:textStyle="italic"
-                android:textSize="18sp"
-                android:id="@+id/edittext"
                 android:layout_centerHorizontal="true"
-                android:text="@string/edittext"/>
+                android:paddingTop="10dp"
+                android:text="@string/editText"
+                android:textSize="18sp"
+                android:textStyle="italic" />
 
             <EditText
-                android:id="@+id/editNomeInput"
+                android:id="@+id/editNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/edittext"
+                android:layout_below="@+id/editText"
                 android:hint="@string/hintNome" />
 
             <EditText
-                android:id="@+id/editQuantidadeInput"
+                android:id="@+id/editQuantityInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editNomeInput"
-                android:hint="@string/hintquantidade"
+                android:layout_below="@+id/editNameInput"
+                android:hint="@string/hintQuantity"
                 android:inputType="number" />
 
             <Button
                 android:id="@+id/editSaveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editQuantidadeInput"
+                android:layout_below="@+id/editQuantityInput"
                 android:text="@string/addButton"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"

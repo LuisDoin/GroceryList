@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">Grocery List</string>
     <string name="item">Item</string>
-    <string name="quantidade">Qnt.</string>
-    <string name="data">Adicionado em</string>
-    <string name="addButton">Salvar</string>
-    <string name="addtext">Adicione um Item</string>
-    <string name="hintNome">Nome</string>
-    <string name="hintquantidade">Quantidade</string>
-    <string name="edittext">Editar Item</string>
-    <string name="confirmationText">Deletar item?</string>
-    <string name="NoButton">Não</string>
-    <string name="YesButton">Sim</string>
+    <string name="quantity">Qnt.</string>
+    <string name="date">Add on</string>
+    <string name="addButton">Save</string>
+    <string name="addText">Add item</string>
+    <string name="hintNome">Name</string>
+    <string name="hintQuantity">Quantity</string>
+    <string name="editText">Edit item</string>
+    <string name="confirmationText">Delete item?</string>
+    <string name="NoButton">No</string>
+    <string name="YesButton">Yes</string>
     <string name="title_activity_add_first_item">AddFirstItem</string>
-    <string name="addFirstItem">Adicione o primeiro item :D</string>
+    <string name="addFirstItem">Add first item :D</string>
 </resources>

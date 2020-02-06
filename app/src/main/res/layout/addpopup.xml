@@ -12,36 +12,36 @@
             android:layout_height="match_parent"
             android:padding="15dp">
 
-             <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:paddingTop="10dp"
-                 android:textStyle="italic"
-                 android:textSize="18sp"
-                 android:id="@+id/addtext"
-                 android:layout_centerHorizontal="true"
-                 android:text="@string/addtext"/>
+            <TextView
+                android:id="@+id/addText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="10dp"
+                android:text="@string/addText"
+                android:textSize="18sp"
+                android:textStyle="italic" />
 
             <EditText
-                android:id="@+id/nomeInput"
+                android:id="@+id/nameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/addtext"
+                android:layout_below="@+id/addText"
                 android:hint="@string/hintNome" />
 
             <EditText
-                android:id="@+id/quantidadeInput"
+                android:id="@+id/quantityInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/nomeInput"
-                android:hint="@string/hintquantidade"
+                android:layout_below="@+id/nameInput"
+                android:hint="@string/hintQuantity"
                 android:inputType="number" />
 
             <Button
                 android:id="@+id/addButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/quantidadeInput"
+                android:layout_below="@+id/quantityInput"
                 android:text="@string/addButton"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"

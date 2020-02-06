@@ -16,8 +16,8 @@ import com.example.grocery_list.R;
 
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public TextView nome, quantidade, data;
-    public Button editar, deletar;
+    public TextView name, quantity, date;
+    public Button edit, delete;
     public Bundle extras;
 
 
@@ -30,18 +30,18 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         ListItem item = extras.getParcelable("item");
 
 
-            nome = (TextView) findViewById(R.id.detailsItem);
-            quantidade = (TextView) findViewById(R.id.detailsQuantidade);
-            data = (TextView) findViewById(R.id.detailsData);
-            editar = (Button) findViewById(R.id.detailsEditarButton);
-            deletar = (Button) findViewById(R.id.detailsDeletarButton);
+            name = (TextView) findViewById(R.id.detailsItem);
+            quantity = (TextView) findViewById(R.id.detailsQuantity);
+            date = (TextView) findViewById(R.id.detailsDate);
+            edit = (Button) findViewById(R.id.detailsEditButton);
+            delete = (Button) findViewById(R.id.detailsDeleteButton);
 
-            nome.setText(item.getNome());
-            quantidade.setText(item.getQuantidade());
-            data.setText(item.getData());
+            name.setText(item.getName());
+            quantity.setText(item.getQuantity());
+            date.setText(item.getDate());
 
-            editar.setOnClickListener(this);
-            deletar.setOnClickListener(this);
+            edit.setOnClickListener(this);
+            delete.setOnClickListener(this);
 
     }
 
@@ -53,13 +53,13 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         switch (v.getId()){
 
-            case R.id.detailsEditarButton:
+            case R.id.detailsEditButton:
 
                 editPopup(item);
 
                 break;
 
-            case R.id.detailsDeletarButton:
+            case R.id.detailsDeleteButton:
 
                 deletePopup(item);
 
@@ -71,7 +71,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
     private void editPopup(final ListItem item){
 
-        final EditText editNome, editQuantidade;
+        final EditText editName, editQuantity;
         Button editButton;
         LayoutInflater inflater;
         AlertDialog.Builder alertDialogBuilder;
@@ -79,14 +79,14 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         View view;
 
         inflater = LayoutInflater.from(getBaseContext());
-        view = inflater.inflate(R.layout.editar_item, null);
+        view = inflater.inflate(R.layout.edit_item, null);
 
-        editNome = (EditText) view.findViewById(R.id.editNomeInput);
-        editQuantidade = (EditText) view.findViewById(R.id.editQuantidadeInput);
+        editName = (EditText) view.findViewById(R.id.editNameInput);
+        editQuantity = (EditText) view.findViewById(R.id.editQuantityInput);
         editButton = (Button) view.findViewById(R.id.editSaveButton);
 
-        editNome.setText(item.getNome());
-        editQuantidade.setText(item.getQuantidade());
+        editName.setText(item.getName());
+        editQuantity.setText(item.getQuantity());
 
         alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(view);
@@ -97,31 +97,31 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View v) {
 
-                editar( item, editNome, editQuantidade );
+                edit( item, editName, editQuantity );
 
             }
         });
 
     }
 
-    private void editar(ListItem item, EditText editNome, EditText editQuantidade){
+    private void edit(ListItem item, EditText editName, EditText editQuantity){
 
         final int position = extras.getInt("position");
 
-        if ( isEmpty(editNome) && isEmpty(editQuantidade) ) {
+        if ( isEmpty(editName) && isEmpty(editQuantity) ) {
 
             Intent returnIntent = getIntent();
-            returnIntent.putExtra("acao", "editar");
+            returnIntent.putExtra("action", "edit");
             returnIntent.putExtra("position", -1);
             returnIntent.putExtra("item", item);
             setResult(RESULT_OK, returnIntent);
             finish();
 
-        }else if( equals(editNome.getText().toString(), item.getNome()) && equals(editQuantidade.getText().toString(), item.getQuantidade())) {
+        }else if( equals(editName.getText().toString(), item.getName()) && equals(editQuantity.getText().toString(), item.getQuantity())) {
 
             Intent returnIntent = getIntent();
 
-            returnIntent.putExtra("acao", "editar");
+            returnIntent.putExtra("action", "edit");
             returnIntent.putExtra("position", -1);
             returnIntent.putExtra("item", item);
             setResult(RESULT_OK, returnIntent);
@@ -129,11 +129,11 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         } else{
 
-            item.setNome(editNome.getText().toString());
-            item.setQuantidade(editQuantidade.getText().toString());
+            item.setName(editName.getText().toString());
+            item.setQuantity(editQuantity.getText().toString());
 
             Intent returnIntent = getIntent();
-            returnIntent.putExtra("acao", "editar");
+            returnIntent.putExtra("action", "edit");
             returnIntent.putExtra("position", position);
             returnIntent.putExtra("item", item);
             setResult(RESULT_OK, returnIntent);
@@ -141,11 +141,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
 
         }
     }
-
-
-
-
-
 
     private void deletePopup( final ListItem item ) {
 
@@ -192,7 +187,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private void delete(ListItem item, int position){
 
         Intent returnIntent = getIntent();
-        returnIntent.putExtra("acao", "deletar");
+        returnIntent.putExtra("action", "delete");
         returnIntent.putExtra("position", position);
         returnIntent.putExtra("item", item);
         setResult(RESULT_OK, returnIntent);

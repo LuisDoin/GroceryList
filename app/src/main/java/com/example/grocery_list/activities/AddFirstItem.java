@@ -15,11 +15,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class AddFirstItem extends AppCompatActivity {
 
     private FloatingActionButton fab;
-    private EditText nome, quantidade;
-    private Button salvarAdd;
+    private EditText name, quantity;
+    private Button saveAdd;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,48 +35,47 @@ public class AddFirstItem extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void addPopup(){
 
         dialogBuilder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.addpopup, null);
-        nome = (EditText) view.findViewById(R.id.nomeInput);
-        quantidade = (EditText) view.findViewById(R.id.quantidadeInput);
-        salvarAdd = (Button) view.findViewById(R.id.addButton);
+        name = (EditText) view.findViewById(R.id.nameInput);
+        quantity = (EditText) view.findViewById(R.id.quantityInput);
+        saveAdd = (Button) view.findViewById(R.id.addButton);
 
         dialogBuilder.setView(view);
         dialog = dialogBuilder.create();
         dialog.show();
 
-        salvarAdd.setOnClickListener(new View.OnClickListener() {
+        saveAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if( !nome.getText().toString().isEmpty() || !quantidade.getText().toString().isEmpty()) {
+                if( !name.getText().toString().isEmpty() || !quantity.getText().toString().isEmpty()) {
 
                     Intent returnIntent = getIntent();
-                    if ( !nome.getText().toString().isEmpty() && !quantidade.getText().toString().isEmpty() ){
+                    if ( !name.getText().toString().isEmpty() && !quantity.getText().toString().isEmpty() ){
 
-                        returnIntent.putExtra("nome", nome.getText().toString());
-                        returnIntent.putExtra("quantidade", quantidade.getText().toString());
-
-                        setResult(RESULT_OK, returnIntent);
-                        finish();
-
-                    }else if ( nome.getText().toString().isEmpty() && !quantidade.getText().toString().isEmpty() ){
-
-                        returnIntent.putExtra("nome", "");
-                        returnIntent.putExtra("quantidade", quantidade.getText().toString());
+                        returnIntent.putExtra("name", name.getText().toString());
+                        returnIntent.putExtra("quantity", quantity.getText().toString());
 
                         setResult(RESULT_OK, returnIntent);
                         finish();
 
-                    }else if ( !nome.getText().toString().isEmpty() && quantidade.getText().toString().isEmpty()){
+                    }else if ( name.getText().toString().isEmpty() && !quantity.getText().toString().isEmpty() ){
 
-                        returnIntent.putExtra("nome", nome.getText().toString());
-                        returnIntent.putExtra("quantidade", "");
+                        returnIntent.putExtra("name", "");
+                        returnIntent.putExtra("quantity", quantity.getText().toString());
+
+                        setResult(RESULT_OK, returnIntent);
+                        finish();
+
+                    }else if ( !name.getText().toString().isEmpty() && quantity.getText().toString().isEmpty()){
+
+                        returnIntent.putExtra("name", name.getText().toString());
+                        returnIntent.putExtra("quantity", "");
 
                         setResult(RESULT_OK, returnIntent);
                         finish();
@@ -90,8 +88,4 @@ public class AddFirstItem extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 }

@@ -29,11 +29,11 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_LISTA_TABLE = "CREATE TABLE " + Constants.TABLE_NAME + "("
+        String CREATE_LIST_TABLE = "CREATE TABLE " + Constants.TABLE_NAME + "("
                 + Constants.KEY_ID + " INTEGER PRIMARY KEY," + Constants.KEY_ITEM + " TEXT,"
-                + Constants.KEY_QUANTIDADE + " TEXT," + Constants.KEY_DATA_ITEM + " LONG);";
+                + Constants.KEY_QUANTITY + " TEXT," + Constants.KEY_DATE_ITEM + " LONG);";
 
-        db.execSQL(CREATE_LISTA_TABLE);
+        db.execSQL(CREATE_LIST_TABLE);
     }
 
     @Override
@@ -49,9 +49,9 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(Constants.KEY_ITEM, item.getNome());
-        values.put(Constants.KEY_QUANTIDADE, item.getQuantidade());
-        values.put(Constants.KEY_DATA_ITEM, java.lang.System.currentTimeMillis());
+        values.put(Constants.KEY_ITEM, item.getName());
+        values.put(Constants.KEY_QUANTITY, item.getQuantity());
+        values.put(Constants.KEY_DATE_ITEM, java.lang.System.currentTimeMillis());
 
         db.insert(Constants.TABLE_NAME, null, values);
 
@@ -61,7 +61,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.query(Constants.TABLE_NAME, new String[] {Constants.KEY_ID, Constants.KEY_ITEM, Constants.KEY_QUANTIDADE, Constants.KEY_DATA_ITEM},
+        Cursor cursor = db.query(Constants.TABLE_NAME, new String[] {Constants.KEY_ID, Constants.KEY_ITEM, Constants.KEY_QUANTITY, Constants.KEY_DATE_ITEM},
                 Constants.KEY_ID + "=?", new String[] {String.valueOf(id)}, null, null, null, null);
 
         if (cursor != null)
@@ -69,44 +69,44 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         ListItem item = new ListItem();
         item.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Constants.KEY_ID))));
-        item.setNome(cursor.getString(cursor.getColumnIndex(Constants.KEY_ITEM)));
-        item.setQuantidade(cursor.getString(cursor.getColumnIndex(Constants.KEY_QUANTIDADE)));
+        item.setName(cursor.getString(cursor.getColumnIndex(Constants.KEY_ITEM)));
+        item.setQuantity(cursor.getString(cursor.getColumnIndex(Constants.KEY_QUANTITY)));
 
         java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance();
-        String formatedDate = dateFormat.format(new Date(cursor.getLong(cursor.getColumnIndex(Constants.KEY_DATA_ITEM))).
+        String formatedDate = dateFormat.format(new Date(cursor.getLong(cursor.getColumnIndex(Constants.KEY_DATE_ITEM))).
                 getTime());
 
-        item.setData(formatedDate);
+        item.setDate(formatedDate);
 
         cursor.close();
 
         return item;
     }
 
-    public List<ListItem> getAllItens(){
+    public List<ListItem> getAllItems(){
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         List<ListItem> itemList = new ArrayList<>();
 
         Cursor cursor = db.query(Constants.TABLE_NAME, new String[] {
-                Constants.KEY_ID, Constants.KEY_ITEM, Constants.KEY_QUANTIDADE,
-                Constants.KEY_DATA_ITEM}, null, null, null, null,
-                Constants.KEY_DATA_ITEM + " DESC");
+                Constants.KEY_ID, Constants.KEY_ITEM, Constants.KEY_QUANTITY,
+                Constants.KEY_DATE_ITEM}, null, null, null, null,
+                Constants.KEY_DATE_ITEM + " DESC");
 
         if (cursor.moveToFirst()){
             do{
                 ListItem item = new ListItem();
 
                 item.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Constants.KEY_ID))));
-                item.setNome(cursor.getString(cursor.getColumnIndex(Constants.KEY_ITEM)));
-                item.setQuantidade(cursor.getString(cursor.getColumnIndex(Constants.KEY_QUANTIDADE)));
+                item.setName(cursor.getString(cursor.getColumnIndex(Constants.KEY_ITEM)));
+                item.setQuantity(cursor.getString(cursor.getColumnIndex(Constants.KEY_QUANTITY)));
 
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat formater = new SimpleDateFormat("dd/MM  hh:mm a");
-                String formatedDate = formater.format(cursor.getLong(cursor.getColumnIndex(Constants.KEY_DATA_ITEM))
+                String formatedDate = formater.format(cursor.getLong(cursor.getColumnIndex(Constants.KEY_DATE_ITEM))
                          - 1000*3600*3 );
 
-                item.setData(formatedDate);
+                item.setDate(formatedDate);
 
                 itemList.add(item);
 
@@ -123,9 +123,9 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(Constants.KEY_ITEM, item.getNome());
-        values.put(Constants.KEY_QUANTIDADE, item.getQuantidade());
-        values.put(Constants.KEY_DATA_ITEM, java.lang.System.currentTimeMillis());
+        values.put(Constants.KEY_ITEM, item.getName());
+        values.put(Constants.KEY_QUANTITY, item.getQuantity());
+        values.put(Constants.KEY_DATE_ITEM, java.lang.System.currentTimeMillis());
 
 
         return db.update(Constants.TABLE_NAME, values, Constants.KEY_ID + "=?", new String[] {String.valueOf(item.getId())});

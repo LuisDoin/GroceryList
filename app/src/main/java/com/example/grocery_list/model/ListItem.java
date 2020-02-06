@@ -5,9 +5,9 @@ import android.os.Parcelable;
 
 public class ListItem implements Parcelable {
 
-    private String nome;
-    private String quantidade;
-    private String data;
+    private String name;
+    private String quantity;
+    private String date;
     private int id;
 
     public ListItem(){
@@ -15,47 +15,47 @@ public class ListItem implements Parcelable {
     }
 
     public ListItem(Parcel in) {
-        nome = in.readString();
-        quantidade = in.readString();
-        data = in.readString();
+        name = in.readString();
+        quantity = in.readString();
+        date = in.readString();
         id = in.readInt();
     }
 
-    public ListItem(String nome, String quantidade, int id) {
-        this.nome = nome;
-        this.quantidade = quantidade;
+    public ListItem(String name, String quantity, int id) {
+        this.name = name;
+        this.quantity = quantity;
         this.id = id;
     }
 
-    public ListItem(String nome, String quantidade) {
-        this.nome = nome;
-        this.quantidade = quantidade;
+    public ListItem(String name, String quantity) {
+        this.name = name;
+        this.quantity = quantity;
 
 
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getQuantidade() {
-        return quantidade;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setQuantidade(String quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getId() {
@@ -75,9 +75,9 @@ public class ListItem implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-        dest.writeString(nome);
-        dest.writeString(quantidade);
-        dest.writeString(data);
+        dest.writeString(name);
+        dest.writeString(quantity);
+        dest.writeString(date);
         dest.writeInt(id);
 
     }

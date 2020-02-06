@@ -41,7 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.itens, parent, false);
+                inflate(R.layout.items, parent, false);
 
 
         return new ViewHolder(view);
@@ -52,9 +52,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         ListItem  item = listItem.get(position);
 
-        holder.nome.setText(item.getNome());
-        holder.quantidade.setText(item.getQuantidade());
-        holder.data.setText(item.getData());
+        holder.name.setText(item.getName());
+        holder.quantity.setText(item.getQuantity());
+        holder.data.setText(item.getDate());
 
     }
 
@@ -66,20 +66,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView nome, quantidade, data;
-        private Button editar, deletar;
+        private TextView name, quantity, data;
+        private Button edit, delete;
 
         private ViewHolder(@NonNull View view) {
             super(view);
 
-            nome = (TextView) view.findViewById(R.id.item);
-            quantidade = (TextView) view.findViewById(R.id.quantidade);
-            data = (TextView) view.findViewById(R.id.data);
-            editar = (Button) view.findViewById(R.id.editar);
-            deletar = (Button) view.findViewById(R.id.deletar);
+            name = (TextView) view.findViewById(R.id.item);
+            quantity = (TextView) view.findViewById(R.id.quantity);
+            data = (TextView) view.findViewById(R.id.date);
+            edit = (Button) view.findViewById(R.id.edit);
+            delete = (Button) view.findViewById(R.id.delete);
 
-            editar.setOnClickListener(this);
-            deletar.setOnClickListener(this);
+            edit.setOnClickListener(this);
+            delete.setOnClickListener(this);
             view.setOnClickListener(this);
 
         }
@@ -89,13 +89,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
             switch (v.getId()){
 
-                case R.id.editar:
+                case R.id.edit:
 
                     editPopup();
 
                     break;
 
-                case R.id.deletar:
+                case R.id.delete:
 
                     deletePopup();
 
@@ -117,7 +117,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private void editPopup(){
 
             final ListItem item = listItem.get(getAdapterPosition());
-            final EditText editNome, editQuantidade;
+            final EditText editName, editQuantity;
             Button editButton;
             LayoutInflater inflater;
             AlertDialog.Builder alertDialogBiulder;
@@ -125,14 +125,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             View view;
 
             inflater = LayoutInflater.from(context);
-            view = inflater.inflate(R.layout.editar_item, null);
+            view = inflater.inflate(R.layout.edit_item, null);
 
-            editNome = (EditText) view.findViewById(R.id.editNomeInput);
-            editQuantidade = (EditText) view.findViewById(R.id.editQuantidadeInput);
+            editName = (EditText) view.findViewById(R.id.editNameInput);
+            editQuantity = (EditText) view.findViewById(R.id.editQuantityInput);
             editButton = (Button) view.findViewById(R.id.editSaveButton);
 
-            editNome.setText(item.getNome());
-            editQuantidade.setText(item.getQuantidade());
+            editName.setText(item.getName());
+            editQuantity.setText(item.getQuantity());
 
 
             alertDialogBiulder = new AlertDialog.Builder(context);
@@ -144,7 +144,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
 
-                    editar(item, editNome, editQuantidade);
+                    edit(item, editName, editQuantity);
 
                     alertDialog.dismiss();
 
@@ -152,28 +152,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             });
         }
 
-        private void editar(ListItem item, EditText editNome, EditText editQuantidade){
+        private void edit(ListItem item, EditText editName, EditText editQuantity){
 
             DataBaseHandler db = new DataBaseHandler(context);
 
-            if ( isEmpty(editNome) && isEmpty(editQuantidade) )
+            if ( isEmpty(editName) && isEmpty(editQuantity) )
 
-                Toast.makeText(context, "Item sem alterações", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "No changes made", Toast.LENGTH_SHORT).show();
 
             else{
 
-                if( equals(editNome.getText().toString(), item.getNome()) &&  equals(editQuantidade.getText().toString(), item.getQuantidade()) )
+                if( equals(editName.getText().toString(), item.getName()) &&  equals(editQuantity.getText().toString(), item.getQuantity()) )
 
-                    Toast.makeText(context, "Item sem alterações", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "No changes made", Toast.LENGTH_SHORT).show();
 
                 else{
 
-                    item.setNome(editNome.getText().toString());
-                    item.setQuantidade(editQuantidade.getText().toString());
+                    item.setName(editName.getText().toString());
+                    item.setQuantity(editQuantity.getText().toString());
                     db.updateItem(item);
 
                     listItem.clear();
-                    listItem.addAll(db.getAllItens());
+                    listItem.addAll(db.getAllItems());
 
                     notifyDataSetChanged();
 
@@ -228,7 +228,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             db.deleteItem(item.getId());
 
             listItem.clear();
-            listItem.addAll(db.getAllItens());
+            listItem.addAll(db.getAllItems());
 
             notifyDataSetChanged();
 
